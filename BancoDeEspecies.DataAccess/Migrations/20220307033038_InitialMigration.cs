@@ -68,24 +68,6 @@ namespace BancoDeEspecies.DataAccess.Migrations
                         principalColumn: "Id");
                 });
 
-            migrationBuilder.InsertData(
-                table: "Cidades",
-                columns: new[] { "Id", "EstadoId", "Nome" },
-                values: new object[,]
-                {
-                    { 1, null, "Porto Alegre" },
-                    { 2, null, "São Paulo" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Estados",
-                columns: new[] { "Id", "Abreviacao", "Nome" },
-                values: new object[,]
-                {
-                    { 1, "RS", "Rio Grande do Sul" },
-                    { 2, "SP", "São Paulo" }
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Cidades_EstadoId",
                 table: "Cidades",

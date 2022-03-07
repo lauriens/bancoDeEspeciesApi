@@ -1,7 +1,7 @@
 ﻿using BancoDeEspecies.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace BancoDeEspecies.DataAccess.Repositories
+namespace BancoDeEspecies.DataAccess.Configurations
 {
     public class BancoDeEspeciesDbContext : DbContext
     {
@@ -44,12 +44,6 @@ namespace BancoDeEspecies.DataAccess.Repositories
                 .HasMany(p => p.Cidades)
                 .WithOne(p => p.Estado);
 
-            builder.Entity<Estado>().HasData
-            (
-                new Estado { Id = 1, Nome = "Rio Grande do Sul", Abreviacao = "RS" }, // Id set manually due to in-memory provider
-                new Estado { Id = 2, Nome = "São Paulo", Abreviacao = "SP" }
-            );
-
             builder
                 .Entity<Cidade>()
                 .ToTable("Cidades");
@@ -75,12 +69,38 @@ namespace BancoDeEspecies.DataAccess.Repositories
                 .HasOne(p => p.Estado)
                 .WithMany(p => p.Cidades);
 
+            builder
+                .Entity<Localidade>()
+                .ToTable("Localidades");
 
-            builder.Entity<Cidade>().HasData
-            (
-                new Cidade { Id = 1, Nome = "Porto Alegre" }, // Id set manually due to in-memory provider
-                new Cidade { Id = 2, Nome = "São Paulo" }
-            );
+            builder
+                .Entity<Localidade>()
+                .HasKey(p => p.Id);
+
+            builder
+                .Entity<Localidade>()
+                .Property(p => p.Id)
+                .IsRequired()
+                .ValueGeneratedOnAdd();
+
+            builder
+                .Entity<Localidade>()
+                .Property(p => p.Latitude);
+
+            builder
+                .Entity<Localidade>()
+                .Property(p => p.Longitude);
+
+            builder
+                .Entity<Localidade>()
+                .HasOne(p => p.Estado)
+                .WithMany(p => p.Localidades);
+
+            builder
+                .Entity<Localidade>()
+                .HasOne(p => p.Cidade)
+                .WithMany(p => p.Localidades);
+
         }
     }
 }

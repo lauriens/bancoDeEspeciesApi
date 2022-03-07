@@ -5,6 +5,7 @@
         public int Id { get; set; }
         public string? Nome { get; set; }
         public string? Abreviacao { get; set; }
-        public IEnumerable<Cidade>? Cidades { get; set;}
+        public IEnumerable<Cidade>? Cidades { get; set; }
+        public IEnumerable<Localidade>? Localidades { get; set; }
     }
 }

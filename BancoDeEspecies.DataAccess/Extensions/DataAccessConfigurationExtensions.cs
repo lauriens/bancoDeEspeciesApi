@@ -1,12 +1,8 @@
-﻿using BancoDeEspecies.DataAccess.Repositories;
+﻿using BancoDeEspecies.DataAccess.Configurations;
+using BancoDeEspecies.DataAccess.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BancoDeEspecies.DataAccess.Extensions
 {
@@ -23,7 +19,7 @@ namespace BancoDeEspecies.DataAccess.Extensions
 
         public static IServiceCollection ConfigureRepositories(this IServiceCollection services)
         {
-            services.AddScoped<IEstadosRepository, EstadosRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
 
             return services;
         }
