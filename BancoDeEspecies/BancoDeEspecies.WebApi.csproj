@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BancoDeEspecies.Application\BancoDeEspecies.Application.csproj" />
     <ProjectReference Include="..\BancoDeEspecies.DataAccess\BancoDeEspecies.DataAccess.csproj" />
   </ItemGroup>
 

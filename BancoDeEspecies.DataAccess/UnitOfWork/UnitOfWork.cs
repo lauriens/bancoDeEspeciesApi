@@ -1,4 +1,6 @@
-﻿using BancoDeEspecies.DataAccess.Configurations;
+﻿
+using BancoDeEspecies.DataAccess.Configurations;
+using BancoDeEspecies.DataAccess.Repositories;
 
 namespace BancoDeEspecies.DataAccess.UnitOfWork
 {
@@ -6,7 +8,7 @@ namespace BancoDeEspecies.DataAccess.UnitOfWork
     {
         new void Dispose();
         void Dispose(bool disposing);
-        BaseRepository<T> GetBaseRepository<T>() where T : class;
+        IBaseRepository<T> GetBaseRepository<T>() where T : class;
         Task SaveChangesAsync();
     }
 
@@ -22,19 +24,19 @@ namespace BancoDeEspecies.DataAccess.UnitOfWork
             _repositories = new Dictionary<string, object>();
         }
 
-        public BaseRepository<T> GetBaseRepository<T>() where T : class
+        public IBaseRepository<T> GetBaseRepository<T>() where T : class
         {
             var type = typeof(T).Name;
 
             if (!_repositories.ContainsKey(type))
             {
-                var repositoryType = typeof(BaseRepository<T>);
+                var repositoryType = typeof(BaseRepository<T>).GetGenericTypeDefinition();
                 var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(T)), _context);
 
                 if (repositoryInstance != null)
                     _repositories.Add(type, repositoryInstance);
             }
-            return (BaseRepository<T>)_repositories[type];
+            return (IBaseRepository<T>)_repositories[type];
         }
 
         public async Task SaveChangesAsync()

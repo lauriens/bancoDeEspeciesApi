@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace BancoDeEspecies.DataAccess.Configurations
+namespace BancoDeEspecies.DataAccess.Repositories
 {
     public interface IBaseRepository<TEntity> where TEntity : class
     {

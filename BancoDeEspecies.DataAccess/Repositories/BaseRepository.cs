@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BancoDeEspecies.DataAccess.Configurations;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace BancoDeEspecies.DataAccess.Configurations
+namespace BancoDeEspecies.DataAccess.Repositories
 {
-    public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
+    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
         protected readonly BancoDeEspeciesDbContext _context;
         protected readonly DbSet<TEntity> _dbSet;
